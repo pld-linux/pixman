@@ -1,17 +1,18 @@
-Summary:	Pixel manipulation library
-Summary:	Biblioteka operacji na pikselach
-Name:		pixman
 %define	snap	20070625
+Summary:	Biblioteka operacji na pikselach
+Summary:	Pixel manipulation library
+Name:		pixman
 Version:	0.9.3
 Release:	0.%{snap}.1
 License:	BSD-like
 Group:		Libraries
-Source0:	pixman-20070625.tar.gz
+Source0:	%{name}-%{snap}.tar.gz
 # Source0-md5:	6e7e6d4c405a813d6e4e75364e3f2798
-URL:		http://xorg.freedesktop.org
+URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+Obsoletes:	libpixman
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -21,23 +22,25 @@ pixman is a pixel manipulation library.
 pixman to biblioteka do operacji na pikselach.
 
 %package devel
-Summary:	Development files for libpixregion
-Summary(pl.UTF-8):	Pliki dla programistów do biblioteki libpixregion
+Summary:	Development files for pixman
+Summary(pl.UTF-8):	Pliki dla programistów do biblioteki pixman
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	libpixman-devel
 
 %description devel
-This package contains development files for libpixregion library.
+This package contains development files for pixman library.
 
 %description devel -l pl.UTF-8
 Ten pakiet zawiera pliki dla programistów korzystających z biblioteki
-libpixregion.
+pixman.
 
 %package static
 Summary:	Static pixman library
 Summary(pl.UTF-8):	Statyczna biblioteka pixman
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Obsoletes:	libpixman-static
 
 %description static
 This package contains static pixman library.
