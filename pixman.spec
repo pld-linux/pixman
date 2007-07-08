@@ -9,7 +9,7 @@ Group:		Libraries
 Source0:	%{name}-%{snap}.tar.gz
 # Source0-md5:	6e7e6d4c405a813d6e4e75364e3f2798
 URL:		http://xorg.freedesktop.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libtool
 Obsoletes:	libpixman
@@ -74,16 +74,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog* NEWS README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%doc TODO
+%attr(755,root,root) %{_libdir}/libpixman.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libpixman.so
+%{_libdir}/libpixman.la
 %{_includedir}/%{name}
-%{_pkgconfigdir}/*.pc
+%{_pkgconfigdir}/pixman.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libpixman.a
