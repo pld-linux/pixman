@@ -1,4 +1,4 @@
-%define	snap	20070625
+%define	snap	20070804
 Summary:	Biblioteka operacji na pikselach
 Summary:	Pixel manipulation library
 Name:		pixman
@@ -7,7 +7,7 @@ Release:	0.%{snap}.1
 License:	BSD-like
 Group:		Libraries
 Source0:	%{name}-%{snap}.tar.gz
-# Source0-md5:	6e7e6d4c405a813d6e4e75364e3f2798
+# Source0-md5:	e100c812471fc471d1066111b058778a
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
