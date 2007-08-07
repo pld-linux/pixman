@@ -30,7 +30,6 @@ Requires:	%{name} = %{version}-%{release}
 Obsoletes:	libic-devel
 Obsoletes:	libpixman-devel
 Obsoletes:	libpixregion-devel
-Obsoletes:	slim
 
 %description devel
 This package contains development files for pixman library.
