@@ -1,13 +1,12 @@
-%define	snap	20070804
 Summary:	Biblioteka operacji na pikselach
 Summary:	Pixel manipulation library
 Name:		pixman
-Version:	0.9.3
-Release:	0.%{snap}.1
+Version:	0.9.4
+Release:	1
 License:	BSD-like
 Group:		Libraries
-Source0:	%{name}-%{snap}.tar.gz
-# Source0-md5:	e100c812471fc471d1066111b058778a
+Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.gz
+# Source0-md5:	44851d2c6015c5c5794c2f2041cea1a9
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -49,7 +48,7 @@ This package contains static pixman library.
 Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 %{__libtoolize}
@@ -75,15 +74,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc TODO
-%attr(755,root,root) %{_libdir}/libpixman.so.*.*.*
+%attr(755,root,root) %{_libdir}/libpixman*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpixman.so
-%{_libdir}/libpixman.la
-%{_includedir}/%{name}
-%{_pkgconfigdir}/pixman.pc
+%attr(755,root,root) %{_libdir}/libpixman*.so
+%{_libdir}/libpixman*.la
+%{_includedir}/%{name}*
+%{_pkgconfigdir}/pixman*.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libpixman.a
+%{_libdir}/libpixman*.a
