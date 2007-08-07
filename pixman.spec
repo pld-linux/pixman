@@ -3,7 +3,7 @@ Summary:	Pixel manipulation library
 Name:		pixman
 Version:	0.9.4
 Release:	1
-License:	BSD-like
+License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.gz
 # Source0-md5:	44851d2c6015c5c5794c2f2041cea1a9
@@ -11,7 +11,9 @@ URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libtool
+Obsoletes:	libic
 Obsoletes:	libpixman
+Obsoletes:	libpixregion
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -25,7 +27,10 @@ Summary:	Development files for pixman
 Summary(pl.UTF-8):	Pliki dla programistów do biblioteki pixman
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Obsoletes:	libic-devel
 Obsoletes:	libpixman-devel
+Obsoletes:	libpixregion-devel
+Obsoletes:	slim
 
 %description devel
 This package contains development files for pixman library.
@@ -39,7 +44,9 @@ Summary:	Static pixman library
 Summary(pl.UTF-8):	Statyczna biblioteka pixman
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Obsoletes:	libic-static
 Obsoletes:	libpixman-static
+Obsoletes:	libpixregion-static
 
 %description static
 This package contains static pixman library.
@@ -74,15 +81,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc TODO
-%attr(755,root,root) %{_libdir}/libpixman*.so.*.*.*
+%attr(755,root,root) %{_libdir}/libpixman-1.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpixman*.so
-%{_libdir}/libpixman*.la
-%{_includedir}/%{name}*
-%{_pkgconfigdir}/pixman*.pc
+%attr(755,root,root) %{_libdir}/libpixman-1.so
+%{_libdir}/libpixman-1.la
+%{_includedir}/pixman-1
+%{_pkgconfigdir}/pixman-1.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/libpixman*.a
+%{_libdir}/libpixman-1.a
