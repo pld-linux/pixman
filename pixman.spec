@@ -1,13 +1,12 @@
 Summary:	Biblioteka operacji na pikselach
 Summary:	Pixel manipulation library
 Name:		pixman
-Version:	0.9.4
-Release:	2
+Version:	0.9.5
+Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.gz
-# Source0-md5:	44851d2c6015c5c5794c2f2041cea1a9
-Patch0:		%{name}-pkgconfig.patch
+# Source0-md5:	a0aebb3323600aef73f80f25136b3742
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -56,7 +55,6 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
