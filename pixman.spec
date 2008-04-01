@@ -79,8 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc TODO
+%doc README TODO
 %attr(755,root,root) %{_libdir}/libpixman-1.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpixman-1.so.0
 
 %files devel
 %defattr(644,root,root,755)
