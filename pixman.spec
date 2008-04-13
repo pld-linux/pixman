@@ -1,5 +1,5 @@
-Summary:	Biblioteka operacji na pikselach
 Summary:	Pixel manipulation library
+Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
 Version:	0.10.0
 Release:	1
