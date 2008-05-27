@@ -7,10 +7,12 @@ License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
 # Source0-md5:	fb23e17a8a0308e8fad6dc153753ba9a
+Patch0:		%{name}-gcc3.patch
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:	rpmbuild(macros) >= 1.453
 Obsoletes:	libic
 Obsoletes:	libpixman
 Obsoletes:	libpixregion
@@ -55,6 +57,9 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %prep
 %setup -q
+%if "%{cc_version}" < "3.4"
+%patch0 -p1
+%endif
 
 %build
 %{__libtoolize}
