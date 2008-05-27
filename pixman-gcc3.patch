@@ -1,0 +1,20 @@
+--- pixman-0.10.0/configure.ac	2008-05-27 08:48:08.171763576 +0300
++++ pixman-0.10.0/configure.ac	2008-05-27 08:50:34.886903977 +0300
+@@ -123,7 +123,7 @@
+ dnl ===========================================================================
+ dnl Check for MMX
+ 
+-MMX_CFLAGS="-mmmx -Winline --param inline-unit-growth=10000 --param large-function-growth=10000"
++MMX_CFLAGS="-mmmx -Winline"
+ 
+ have_mmx_intrinsics=no
+ AC_MSG_CHECKING(whether to use MMX intrinsics)
+@@ -188,7 +188,7 @@
+ dnl ===========================================================================
+ dnl Check for SSE2
+ 
+-SSE_CFLAGS="-mmmx -msse2 -Winline --param inline-unit-growth=10000 --param large-function-growth=10000"
++SSE_CFLAGS="-mmmx -msse2 -Winline"
+ 
+ have_sse2_intrinsics=no
+ AC_MSG_CHECKING(whether to use SSE2 intrinsics)
