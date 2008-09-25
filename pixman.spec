@@ -7,7 +7,6 @@ License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
 # Source0-md5:	494af78c1c7d825c9ad6815d7b91f17d
-Patch0:		%{name}-gcc3.patch
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -57,9 +56,6 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %prep
 %setup -q
-%if "%{cc_version}" < "3.4"
-%patch0 -p1
-%endif
 
 %build
 %{__libtoolize}
@@ -67,7 +63,10 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+%if "%{cc_version}" < "4.2"
+	--disable-sse2
+%endif
 %{__make}
 
 %install
