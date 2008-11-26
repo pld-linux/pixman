@@ -8,6 +8,7 @@ License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
 # Source0-md5:	494af78c1c7d825c9ad6815d7b91f17d
+Patch0:		%{name}-no_pkgconfig.patch
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
@@ -57,6 +58,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -70,6 +72,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 	--disable-sse2
 %endif
 %endif
+
 %{__make}
 
 %install
