@@ -1,6 +1,7 @@
 Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
+# even is stable, odd is unstable
 Version:	0.12.0
 Release:	2
 License:	MIT
