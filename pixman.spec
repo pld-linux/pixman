@@ -2,12 +2,12 @@ Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
 # 0.16.x is stable, 0.17.x is unstable
-Version:	0.16.4
+Version:	0.16.6
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
-# Source0-md5:	70c249a575ed02b7a5daa1bc9f9c6a4e
+# Source0-md5:	fbd6ee9cb09d0b26281557bc7afcb3ab
 Patch0:		%{name}-no_pkgconfig.patch
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
