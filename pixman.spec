@@ -14,6 +14,7 @@ BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	rpmbuild(macros) >= 1.453
+BuildRequires:	sed >= 4.0
 Obsoletes:	libic
 Obsoletes:	libpixman
 Obsoletes:	libpixregion
