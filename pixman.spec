@@ -68,6 +68,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-silent-rules \
 %ifarch %{x8664}
 %if "%{cc_version}" < "4.2"
 	--disable-sse2
