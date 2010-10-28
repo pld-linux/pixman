@@ -1,18 +1,18 @@
 Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
-# 0.18.x is stable, 0.19.x is unstable
-Version:	0.18.4
+# 0.20.x is stable, 0.21.x is unstable
+Version:	0.20.0
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
-# Source0-md5:	c1d69aaddba8c1e046d26ac125da95bf
-Patch0:		%{name}-no_pkgconfig.patch
+# Source0-md5:	512ec766a911142b901157ba581f6e75
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.453
 BuildRequires:	sed >= 4.0
 Obsoletes:	libic
@@ -59,7 +59,6 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -68,6 +67,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %{__autoheader}
 %{__automake}
 %configure \
+	--disable-gtk \
 	--disable-silent-rules \
 %ifarch %{x8664}
 %if "%{cc_version}" < "4.2"
@@ -93,7 +93,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README TODO
+%doc COPYING README TODO
 %attr(755,root,root) %{_libdir}/libpixman-1.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpixman-1.so.0
 
