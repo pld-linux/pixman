@@ -8,7 +8,7 @@ License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
 # Source0-md5:	f6e3294c4edb7b6bca8459e604286348
-URL:		http://xorg.freedesktop.org/
+URL:		http://pixman.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
 BuildRequires:	libtool
