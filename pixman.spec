@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
 # 0.32.x is stable, 0.33.x is unstable
 Version:	0.32.6
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
