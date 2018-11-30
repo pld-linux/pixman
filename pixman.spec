@@ -1,17 +1,22 @@
-%bcond_without	tests
+#
+# Conditional build:
+%bcond_without	tests	# unit tests
+
 Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
-# 0.34.x is stable, 0.35.x is unstable
-Version:	0.34.0
+# 0.36.x is stable, 0.37.x unstable
+Version:	0.36.0
 Release:	1
 License:	MIT
 Group:		Libraries
-Source0:	http://xorg.freedesktop.org/archive/individual/lib/%{name}-%{version}.tar.bz2
-# Source0-md5:	002a4fcb644ddfcb4b0e4191576a0d59
+Source0:	https://www.cairographics.org/releases/%{name}-%{version}.tar.gz
+# Source0-md5:	552df0d7ccccfadd07ae3758cc9a057f
 URL:		http://pixman.org/
-BuildRequires:	autoconf >= 2.57
+BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake
+%{?with_tests:BuildRequires:	libgomp-devel}
+%{?with_tests:BuildRequires:	libpng-devel}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.453
@@ -61,6 +66,8 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %prep
 %setup -q
 
+%{__sed} -i -e 's#<pixman-version.h>#"pixman-version.h"#' pixman/pixman.h
+
 %build
 %{__libtoolize}
 %{__aclocal}
@@ -85,8 +92,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-sed -i -e 's#<pixman-version.h>#<pixman-1/pixman-version.h>#g' $RPM_BUILD_ROOT%{_includedir}/pixman-1/pixman.h
 
 %clean
 rm -rf $RPM_BUILD_ROOT
