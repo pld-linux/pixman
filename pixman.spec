@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
 # 0.36.x is stable, 0.37.x unstable
 Version:	0.36.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://www.cairographics.org/releases/%{name}-%{version}.tar.gz
@@ -15,7 +15,6 @@ Source0:	https://www.cairographics.org/releases/%{name}-%{version}.tar.gz
 URL:		http://pixman.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake
-%{?with_tests:BuildRequires:	libgomp-devel}
 %{?with_tests:BuildRequires:	libpng-devel}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -76,6 +75,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %{__automake}
 %configure \
 	--disable-gtk \
+	--disable-openmp \
 	--disable-silent-rules \
 %ifarch %{x8664}
 %if "%{cc_version}" < "4.2"
