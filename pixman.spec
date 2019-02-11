@@ -6,12 +6,12 @@ Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
 # 0.36.x is stable, 0.37.x unstable
-Version:	0.36.0
-Release:	2
+Version:	0.38.0
+Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://www.cairographics.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	552df0d7ccccfadd07ae3758cc9a057f
+# Source0-md5:	8f34a92041de2daaa4c34c5f7c860f21
 URL:		http://pixman.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake
