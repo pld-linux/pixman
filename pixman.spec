@@ -1,6 +1,7 @@
 #
 # Conditional build:
-%bcond_without	tests	# unit tests
+%bcond_without	static_libs	# static library
+%bcond_without	tests		# unit tests
 
 Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
@@ -68,6 +69,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %build
 %meson build \
+	%{!?with_static_libs:--default-library=shared} \
 	-Dgtk=disabled \
 	-Dopenmp=disabled \
 %ifarch %{x8664}
@@ -103,6 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/pixman-1
 %{_pkgconfigdir}/pixman-1.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libpixman-1.a
+%endif
