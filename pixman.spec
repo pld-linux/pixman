@@ -6,19 +6,18 @@ Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
 # 0.42.x is stable, 0.43.x unstable
-Version:	0.42.2
+Version:	0.43.2
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://www.cairographics.org/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	a0f6ab8a1d8e0e2cd80e935525e2a864
+# Source0-md5:	b5ad6407cd8c7abf8c1669273a2fb162
 URL:		http://pixman.org/
-BuildRequires:	autoconf >= 2.62
-BuildRequires:	automake
 %{?with_tests:BuildRequires:	libpng-devel}
-BuildRequires:	libtool
+BuildRequires:	meson >= 0.52.0
+BuildRequires:	ninja
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.453
+BuildRequires:	rpmbuild(macros) >= 1.750
 BuildRequires:	sed >= 4.0
 Obsoletes:	libic < 0.2
 Obsoletes:	libpixman < 0.2
@@ -68,30 +67,23 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %{__sed} -i -e 's#<pixman-version.h>#"pixman-version.h"#' pixman/pixman.h
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--disable-gtk \
-	--disable-openmp \
-	--disable-silent-rules \
+%meson build \
+	-Dgtk=disabled \
+	-Dopenmp=disabled \
 %ifarch %{x8664}
-%if "%{cc_version}" < "4.2"
-	--disable-sse2
+%if %{_ver_lt %{cc_version} 4.2}
+	-Dsse2=disabled
 %endif
 %endif
 
-%{__make}
+%ninja_build -C build
 
-%{?with_tests:%{__make} -j1 check}
+%{?with_tests:%ninja_test -C build}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -108,7 +100,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpixman-1.so
-%{_libdir}/libpixman-1.la
 %{_includedir}/pixman-1
 %{_pkgconfigdir}/pixman-1.pc
 
