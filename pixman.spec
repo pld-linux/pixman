@@ -8,7 +8,7 @@ Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
 # 0.42.x is stable, 0.43.x unstable
 Version:	0.44.2
-Release:	1
+Release:	2
 License:	MIT
 Group:		Libraries
 Source0:	https://www.cairographics.org/releases/%{name}-%{version}.tar.gz
@@ -80,7 +80,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 
 %ninja_build -C build
 
-%{?with_tests:%ninja_test -C build}
+%{?with_tests:%__meson test -C build --no-rebuild --print-errorlogs --timeout-multiplier 2}
 
 %install
 rm -rf $RPM_BUILD_ROOT
