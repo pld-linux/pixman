@@ -18,7 +18,7 @@ URL:		http://pixman.org/
 BuildRequires:	meson >= 1.3.0
 BuildRequires:	ninja
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.750
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	sed >= 4.0
 Obsoletes:	libic < 0.2
 Obsoletes:	libpixman < 0.2
@@ -68,7 +68,7 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %{__sed} -i -e 's#<pixman-version.h>#"pixman-version.h"#' pixman/pixman.h
 
 %build
-%meson build \
+%meson \
 	%{!?with_static_libs:--default-library=shared} \
 	-Dgtk=disabled \
 	-Dopenmp=disabled \
@@ -78,14 +78,14 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %endif
 %endif
 
-%ninja_build -C build
+%meson_build
 
 %{?with_tests:%__meson test -C build --no-rebuild --print-errorlogs --timeout-multiplier 2}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
+%meson_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
