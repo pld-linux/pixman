@@ -2,21 +2,61 @@
 # Conditional build:
 %bcond_without	static_libs	# static library
 %bcond_without	tests		# unit tests
+%bcond_without	altivec		# PPC VMX/Altivec intrinsics
+%bcond_without	armv6simd	# ARMv6 SIMD intrinsics
+%bcond_without	armneon		# ARM Neon intrinsics
+%bcond_without	arm64neon	# ARM64 Neon intrinsics
+%bcond_without	loongson_mmi	# MIPS64 Loongson MMI intrinsics
+%bcond_without	mips_dspr2	# MIPS32 DSPr2 intrinsics
+%bcond_without	mmx		# x86 MMX instrinsics
+%bcond_without	sse2		# x86 SSE2 instrinsics
+%bcond_without	ssse3		# x86 SSSE3 instrinsics
+%bcond_without	rvv		# RISC-V Vector extension
 
+%ifnarch mips
+%undefine	with_mips_dspr2
+%endif
+%ifnarch mips64
+%undefine	with_loongson_mmi
+%endif
+%ifnarch %{ix86} %{x8664} x32
+%undefine	with_mmx
+%undefine	with_sse2
+%undefine	with_ssse3
+%endif
+%ifnarch ppc ppc64
+%undefine	with_altivec
+%endif
+%ifnarch %{arm}
+%undefine	with_armv6simd
+%undefine	with_armneon
+%endif
+%ifnarch aarch64
+%undefine	with_arm64neon
+%endif
+%ifnarch riscv
+%undefine	with_rvv
+%endif
 Summary:	Pixel manipulation library
 Summary(pl.UTF-8):	Biblioteka operacji na pikselach
 Name:		pixman
-# 0.42.x is stable, 0.43.x unstable
+# 0.46.x is stable, 0.47.x unstable
 Version:	0.46.0
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://www.cairographics.org/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	16fd88571a1cda22176bc82d653c6e85
-URL:		http://pixman.org/
+URL:		https://pixman.org/
+%if %{with sse2} || %{with ssse3}
+BuildRequires:	gcc >= 6:4.2
+%endif
+%if %{with loongson_mmi}
+BuildRequires:	gcc >= 6:4.4
+%endif
 %{?with_tests:BuildRequires:	libpng-devel}
 BuildRequires:	meson >= 1.3.0
-BuildRequires:	ninja
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	sed >= 4.0
@@ -70,17 +110,28 @@ Ten pakiet zawiera statyczną wersję biblioteki pixman.
 %build
 %meson \
 	%{!?with_static_libs:--default-library=shared} \
+	-Da64-neon=%{__enabled_disabled arm64neon} \
+	-Darm-simd=%{__enabled_disabled arm-simd} \
+	-Ddemos=disabled \
+	-Dgnu-inline-asm=enabled \
 	-Dgtk=disabled \
+	-Dlibpng=enabled \
+	-Dloongson-mmi=%{__enabled_disabled loongson_mmi} \
+	-Dmips-dspr2=%{__enabled_disabled mips_dspr2} \
+	-Dneon=%{__enabled_disabled armneon} \
 	-Dopenmp=disabled \
-%ifarch %{x8664}
-%if %{_ver_lt %{cc_version} 4.2}
-	-Dsse2=disabled
-%endif
-%endif
+	-Drvv=%{__enabled_disabled rvv} \
+	-Dsse2=%{__enabled_disabled sse2} \
+	-Dssse3=%{__enabled_disabled ssse3} \
+	-Dtests=%{__enabled_disabled tests} \
+	-Dtls=enabled \
+	-Dvmx=%{__enabled_disabled altivec}
 
 %meson_build
 
-%{?with_tests:%__meson test -C build --no-rebuild --print-errorlogs --timeout-multiplier 2}
+%if %{with tests}
+%meson_test --no-rebuild --timeout-multiplier 2
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
